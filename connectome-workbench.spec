@@ -18,6 +18,7 @@ BuildRequires:  cmake
 BuildRequires:  gcc-c++
 BuildRequires:  openssl-devel
 BuildRequires:  qt4-devel
+BuildRequires:  qtwebkit-devel
 BuildRequires:  zlib-devel
 BuildRequires:  freetype-devel ftgl-devel
 BuildRequires:  mesa-libOSMesa-devel
