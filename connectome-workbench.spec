@@ -68,5 +68,5 @@ popd
 %{_bindir}/wb_command
 
 %changelog
-* Sun Nov 08 2015 Igor Gnatenko <i.gnateno.brain@gmail.com> - 1.2.0-0.1pre1
+* Sun Nov 08 2015 Igor Gnatenko <i.gnateno.brain@gmail.com> - 1.1.1-1
 - Initial package
