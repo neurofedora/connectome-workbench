@@ -1,0 +1,119 @@
+From 36d67e453081b7cbb1064b35ec932bcda7507202 Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 8 Nov 2015 09:02:18 +0100
+Subject: [PATCH 2/5] cmake: use system ftgl conditionally
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ src/Brain/CMakeLists.txt           |  3 +--
+ src/Brain/FtglFontTextRenderer.cxx |  1 -
+ src/CMakeLists.txt                 | 14 +++++++++++---
+ src/CommandLine/CMakeLists.txt     |  2 +-
+ src/Desktop/CMakeLists.txt         |  2 +-
+ src/FtglFont/CMakeLists.txt        |  2 ++
+ 6 files changed, 16 insertions(+), 8 deletions(-)
+
+diff --git a/src/Brain/CMakeLists.txt b/src/Brain/CMakeLists.txt
+index 99ac2d9..867a1ae 100644
+--- a/src/Brain/CMakeLists.txt
++++ b/src/Brain/CMakeLists.txt
+@@ -307,8 +307,7 @@ ${CMAKE_SOURCE_DIR}/Common
+ 
+ IF (FREETYPE_FOUND)
+ INCLUDE_DIRECTORIES(
+-   ${CMAKE_SOURCE_DIR}/FtglFont
+-   ${CMAKE_SOURCE_DIR}/FtglFont/FTGL
++   ${FTGL_INCLUDE_DIRS}
+    ${FREETYPE_INCLUDE_DIR_ft2build}
+    ${FREETYPE_INCLUDE_DIR_freetype2}
+ )
+diff --git a/src/Brain/FtglFontTextRenderer.cxx b/src/Brain/FtglFontTextRenderer.cxx
+index cca36e4..49b91b8 100644
+--- a/src/Brain/FtglFontTextRenderer.cxx
++++ b/src/Brain/FtglFontTextRenderer.cxx
+@@ -70,7 +70,6 @@
+ #include "CaretOpenGLInclude.h"
+ 
+ #ifdef HAVE_FREETYPE
+-#include <FtglConfig.h>
+ #include <FTGL/ftgl.h>
+ using namespace FTGL;
+ #endif // HAVE_FREETYPE
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index f337200..1ec08b7 100755
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -308,13 +308,21 @@ SET(FTGL_FONT_MODULE_FOR_LINKING "")
+ 
+ FIND_PACKAGE(Freetype)
+ IF (FREETYPE_FOUND)
+-    SET (FTGL_FONT_MODULE_FOR_LINKING FtglFont)
+     MESSAGE("FreeType library found")
+     MESSAGE("   INCLUDES ${FREETYPE_INCLUDE_DIRS}")
+     MESSAGE("   INCLUDES_FT2_BUILD ${FREETYPE_INCLUDE_DIR_ft2build}")
+     MESSAGE("   INCLUDES_FT2 ${FREETYPE_INCLUDE_DIR_freetype2}")
+     MESSAGE("   LIBS ${FREETYPE_LIBRARIES}")
+ 
++    PKG_CHECK_MODULES(FTGL ftgl)
++    IF (FTGL_FOUND)
++        MESSAGE("FTGL library found")
++        MESSAGE("   INCLUDES ${FTGL_INCLUDE_DIRS}")
++        MESSAGE("   LIBS ${FTGL_LIBRARIES}")
++    ELSE (FTGL_FOUND)
++        MESSAGE("FTGL library not found, using bundled")
++    ENDIF (FTGL_FOUND)
++
+     ADD_DEFINITIONS(-DHAVE_FREETYPE)
+ ELSE (FREETYPE_FOUND)
+     SET (FREETYPE_LIBRARY "")
+@@ -407,9 +415,9 @@ ADD_SUBDIRECTORY ( Common )
+ ADD_SUBDIRECTORY ( Xml )
+ ADD_SUBDIRECTORY ( Scenes )
+ ADD_SUBDIRECTORY ( OSMesaDummy )
+-IF (FREETYPE_FOUND)
++IF (FREETYPE_FOUND AND NOT FTGL_FOUND)
+     ADD_SUBDIRECTORY ( FtglFont )
+-ENDIF (FREETYPE_FOUND)
++ENDIF (FREETYPE_FOUND AND NOT FTGL_FOUND)
+ ADD_SUBDIRECTORY ( Charting )
+ ADD_SUBDIRECTORY ( Palette )
+ ADD_SUBDIRECTORY ( FilesBase )
+diff --git a/src/CommandLine/CMakeLists.txt b/src/CommandLine/CMakeLists.txt
+index 7f62a97..1fdc552 100644
+--- a/src/CommandLine/CMakeLists.txt
++++ b/src/CommandLine/CMakeLists.txt
+@@ -58,7 +58,7 @@ Operations
+ Algorithms
+ OperationsBase
+ Brain
+-${FTGL_FONT_MODULE_FOR_LINKING}
++${FTGL_LIBRARIES}
+ Files
+ Palette
+ Gifti
+diff --git a/src/Desktop/CMakeLists.txt b/src/Desktop/CMakeLists.txt
+index 31ddada..26dd383 100644
+--- a/src/Desktop/CMakeLists.txt
++++ b/src/Desktop/CMakeLists.txt
+@@ -94,7 +94,7 @@ OperationsBase
+ ${Qwt_LIBRARIES}
+ OSMesaDummy
+ Brain
+-${FTGL_FONT_MODULE_FOR_LINKING}
++${FTGL_LIBRARIES}
+ Files
+ Charting
+ Palette
+diff --git a/src/FtglFont/CMakeLists.txt b/src/FtglFont/CMakeLists.txt
+index adefca5..5015d54 100644
+--- a/src/FtglFont/CMakeLists.txt
++++ b/src/FtglFont/CMakeLists.txt
+@@ -146,3 +146,5 @@ ${CMAKE_SOURCE_DIR}/FtglFont/FTGL
+ ${CMAKE_SOURCE_DIR}/FtglFont/FTGlyph
+ )
+ 
++SET(FTGL_LIBRARIES Ftgl)
++SET(FTGL_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/FTGL)
+-- 
+2.6.3
+

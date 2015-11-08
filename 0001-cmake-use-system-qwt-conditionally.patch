@@ -1,0 +1,95 @@
+From 591399637417f45ee5b5fa9d02a767804226889b Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 8 Nov 2015 08:47:10 +0100
+Subject: [PATCH 1/5] cmake: use system qwt conditionally
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ src/CMakeLists.txt         | 16 +++++++++++++++-
+ src/Desktop/CMakeLists.txt |  4 ++--
+ src/GuiQt/CMakeLists.txt   |  2 +-
+ src/Qwt/CMakeLists.txt     |  2 ++
+ 4 files changed, 20 insertions(+), 4 deletions(-)
+
+diff --git a/src/CMakeLists.txt b/src/CMakeLists.txt
+index 6c68079..f337200 100755
+--- a/src/CMakeLists.txt
++++ b/src/CMakeLists.txt
+@@ -207,6 +207,18 @@ ENDIF(QT4_FOUND)
+ INCLUDE(${QT_USE_FILE})
+ 
+ #
++# Try to find Qwt, utherwise use bundle
++#
++PKG_CHECK_MODULES(Qwt qwt)
++IF (Qwt_FOUND)
++    MESSAGE("Qwt library found")
++    MESSAGE("   INCLUDES ${Qwt_INCLUDE_DIRS}")
++    MESSAGE("   LIBS ${Qwt_LIBRARIES}")
++ELSE (Qwt_FOUND)
++    MESSAGE("Qwt library not found, using bundled")
++ENDIF (Qwt_FOUND)
++
++#
+ # The Find OpenMP package may not work on all systems and the user may
+ # furnish the paths to the OpenMP files by using environment variables.
+ #
+@@ -409,7 +421,9 @@ ADD_SUBDIRECTORY ( OperationsBase )
+ ADD_SUBDIRECTORY ( Algorithms )
+ ADD_SUBDIRECTORY ( Operations )
+ ADD_SUBDIRECTORY ( Brain )
+-ADD_SUBDIRECTORY ( Qwt )
++IF (NOT Qwt_FOUND)
++    ADD_SUBDIRECTORY ( Qwt )
++ENDIF (NOT Qwt_FOUND)
+ ADD_SUBDIRECTORY ( GuiQt )
+ ADD_SUBDIRECTORY ( Commands )
+ ADD_SUBDIRECTORY ( Desktop )
+diff --git a/src/Desktop/CMakeLists.txt b/src/Desktop/CMakeLists.txt
+index 6aca857..31ddada 100644
+--- a/src/Desktop/CMakeLists.txt
++++ b/src/Desktop/CMakeLists.txt
+@@ -91,7 +91,7 @@ Commands
+ Operations
+ Algorithms
+ OperationsBase
+-Qwt
++${Qwt_LIBRARIES}
+ OSMesaDummy
+ Brain
+ ${FTGL_FONT_MODULE_FOR_LINKING}
+@@ -167,7 +167,7 @@ ${CMAKE_SOURCE_DIR}/Palette
+ ${CMAKE_SOURCE_DIR}/Cifti
+ ${CMAKE_SOURCE_DIR}/Gifti
+ ${CMAKE_SOURCE_DIR}/Nifti
+-${CMAKE_SOURCE_DIR}/Qwt
++${Qwt_INCLUDE_DIRS}
+ ${CMAKE_SOURCE_DIR}/Scenes
+ ${CMAKE_SOURCE_DIR}/Xml
+ ${CMAKE_SOURCE_DIR}/Common
+diff --git a/src/GuiQt/CMakeLists.txt b/src/GuiQt/CMakeLists.txt
+index c451a03..087e469 100644
+--- a/src/GuiQt/CMakeLists.txt
++++ b/src/GuiQt/CMakeLists.txt
+@@ -490,7 +490,7 @@ ${FORMS_HEADERS}
+ 
+ INCLUDE_DIRECTORIES(
+ ${CMAKE_SOURCE_DIR}/GuiQt
+-${CMAKE_SOURCE_DIR}/Qwt
++${Qwt_INCLUDE_DIRS}
+ ${CMAKE_SOURCE_DIR}/Algorithms
+ ${CMAKE_SOURCE_DIR}/Brain
+ ${CMAKE_SOURCE_DIR}/Commands
+diff --git a/src/Qwt/CMakeLists.txt b/src/Qwt/CMakeLists.txt
+index c8fbaa6..fb23159 100644
+--- a/src/Qwt/CMakeLists.txt
++++ b/src/Qwt/CMakeLists.txt
+@@ -191,3 +191,5 @@ ${SOURCE_FILES}
+ ${MOC_SOURCE_FILES}
+ )
+ 
++SET(Qwt_LIBRARIES Qwt)
++SET(Qwt_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR})
+-- 
+2.6.3
+

@@ -1,0 +1,29 @@
+From 675d633de700dc0fa5943c9c7ff3dd96db29c0cf Mon Sep 17 00:00:00 2001
+From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+Date: Sun, 8 Nov 2015 10:02:07 +0100
+Subject: [PATCH 5/5] fix base operand of '->' has non-pointer type 'const
+ QwtScaleDiv'
+
+Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
+---
+ src/GuiQt/MapSettingsPaletteColorMappingWidget.cxx | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/src/GuiQt/MapSettingsPaletteColorMappingWidget.cxx b/src/GuiQt/MapSettingsPaletteColorMappingWidget.cxx
+index 486c821..288687a 100644
+--- a/src/GuiQt/MapSettingsPaletteColorMappingWidget.cxx
++++ b/src/GuiQt/MapSettingsPaletteColorMappingWidget.cxx
+@@ -1729,8 +1729,8 @@ MapSettingsPaletteColorMappingWidget::updateHistogramPlot()
+             switch (this->paletteColorMapping->getThresholdTest()) {
+                 case PaletteThresholdTestEnum::THRESHOLD_TEST_SHOW_INSIDE:
+                 {
+-                    const float plotMinValue = this->thresholdPlot->axisScaleDiv(QwtPlot::xBottom)->lowerBound();
+-                    const float plotMaxValue = this->thresholdPlot->axisScaleDiv(QwtPlot::xBottom)->upperBound();
++                    const float plotMinValue = this->thresholdPlot->axisScaleDiv(QwtPlot::xBottom).lowerBound();
++                    const float plotMaxValue = this->thresholdPlot->axisScaleDiv(QwtPlot::xBottom).upperBound();
+                     
+                     /* 
+                      * Draw shaded region to left of minimum threshold
+-- 
+2.6.3
+
