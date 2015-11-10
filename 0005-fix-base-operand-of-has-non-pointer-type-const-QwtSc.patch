@@ -1,8 +1,10 @@
-From 675d633de700dc0fa5943c9c7ff3dd96db29c0cf Mon Sep 17 00:00:00 2001
+From bb32e590e8f65e0d2f926ac2e48bde79f46b2e88 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 8 Nov 2015 10:02:07 +0100
 Subject: [PATCH 5/5] fix base operand of '->' has non-pointer type 'const
  QwtScaleDiv'
+
+because of change in qwt 6.1.x
 
 Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 ---

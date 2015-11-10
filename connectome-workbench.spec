@@ -1,6 +1,11 @@
+# cifticoder [04:24:13] ignatenkobrain: in connectome-workbench, we use the
+# "NDEBUG" define to disable some nontrivial developer-useful code that makes
+# some things noticably slower, so please add -DNDEBUG to the compile flags
+%global optflags %(echo %{optflags} -DNDEBUG)
+
 Name:           connectome-workbench
 Version:        1.1.1
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Connectome Workbench
 
 # Check README for licenses
@@ -42,6 +47,9 @@ rm -rf src/{Qwt,FtglFont,Quazip}
 # drop depending on git commit
 sed -i -e '/DEPENDS ApplicationInformation.cxx.in/d' src/Common/CMakeLists.txt
 
+# some recursion workaround
+sed -i -e '/->/s,^,//,' src/Desktop/desktop.cxx
+
 rm -rf src/build/
 mkdir -p src/build/
 
@@ -68,5 +76,9 @@ popd
 %{_bindir}/wb_command
 
 %changelog
+* Tue Nov 10 2015 Igor Gnatenko <i.gnateno.brain@gmail.com> - 1.1.1-2
+- workaround libpng recursion
+- Add -DNDEBUG
+
 * Sun Nov 08 2015 Igor Gnatenko <i.gnateno.brain@gmail.com> - 1.1.1-1
 - Initial package

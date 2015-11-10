@@ -1,8 +1,10 @@
-From c0afa16b9bac2c49527ea28119c5491b7cf334e4 Mon Sep 17 00:00:00 2001
+From c91bf8814f1c277aa4b2bcbbd414cc038464b233 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 8 Nov 2015 09:57:40 +0100
 Subject: [PATCH 4/5] fix invalid conversion from 'QWidget*' to
  'QwtPlotCanvas*'
+
+probably because of '-fpermissive' flag of GCC, probably due to change in qwt
 
 Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 ---

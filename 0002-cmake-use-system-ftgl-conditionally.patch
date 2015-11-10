@@ -1,4 +1,4 @@
-From 36d67e453081b7cbb1064b35ec932bcda7507202 Mon Sep 17 00:00:00 2001
+From 5f5ffc47f30942c05ade368a44710c256b5c7162 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 8 Nov 2015 09:02:18 +0100
 Subject: [PATCH 2/5] cmake: use system ftgl conditionally
@@ -105,15 +105,15 @@ index 31ddada..26dd383 100644
  Charting
  Palette
 diff --git a/src/FtglFont/CMakeLists.txt b/src/FtglFont/CMakeLists.txt
-index adefca5..5015d54 100644
+index adefca5..db54892 100644
 --- a/src/FtglFont/CMakeLists.txt
 +++ b/src/FtglFont/CMakeLists.txt
 @@ -146,3 +146,5 @@ ${CMAKE_SOURCE_DIR}/FtglFont/FTGL
  ${CMAKE_SOURCE_DIR}/FtglFont/FTGlyph
  )
  
-+SET(FTGL_LIBRARIES Ftgl)
-+SET(FTGL_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/FTGL)
++SET(FTGL_LIBRARIES FtglFont PARENT_SCOPE)
++SET(FTGL_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/FTGL PARENT_SCOPE)
 -- 
 2.6.3
 
