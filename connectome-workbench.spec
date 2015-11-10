@@ -48,7 +48,7 @@ rm -rf src/{Qwt,FtglFont,Quazip}
 sed -i -e '/DEPENDS ApplicationInformation.cxx.in/d' src/Common/CMakeLists.txt
 
 # some recursion workaround
-sed -i -e '/->/s,^,//,' src/Desktop/desktop.cxx
+sed -i -e '/->beep/s,^,//,' src/Desktop/desktop.cxx
 
 rm -rf src/build/
 mkdir -p src/build/
