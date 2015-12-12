@@ -86,9 +86,9 @@ popd
 - Fix license tag
 - Backport some more patches to fix libpng errors
 
-* Tue Nov 10 2015 Igor Gnatenko <i.gnateno.brain@gmail.com> - 1.1.1-2
+* Tue Nov 10 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 1.1.1-2
 - workaround libpng recursion
 - Add -DNDEBUG
 
-* Sun Nov 08 2015 Igor Gnatenko <i.gnateno.brain@gmail.com> - 1.1.1-1
+* Sun Nov 08 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 1.1.1-1
 - Initial package
