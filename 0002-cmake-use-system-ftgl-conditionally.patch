@@ -1,7 +1,7 @@
 From 5f5ffc47f30942c05ade368a44710c256b5c7162 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 8 Nov 2015 09:02:18 +0100
-Subject: [PATCH 2/5] cmake: use system ftgl conditionally
+Subject: [PATCH 2/8] cmake: use system ftgl conditionally
 
 Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 ---
@@ -115,5 +115,5 @@ index adefca5..db54892 100644
 +SET(FTGL_LIBRARIES FtglFont PARENT_SCOPE)
 +SET(FTGL_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} ${CMAKE_CURRENT_SOURCE_DIR}/FTGL PARENT_SCOPE)
 -- 
-2.6.3
+2.6.4
 

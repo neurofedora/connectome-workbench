@@ -1,7 +1,7 @@
 From c91bf8814f1c277aa4b2bcbbd414cc038464b233 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 8 Nov 2015 09:57:40 +0100
-Subject: [PATCH 4/5] fix invalid conversion from 'QWidget*' to
+Subject: [PATCH 4/8] fix invalid conversion from 'QWidget*' to
  'QwtPlotCanvas*'
 
 probably because of '-fpermissive' flag of GCC, probably due to change in qwt
@@ -33,5 +33,5 @@ index a0a03ec..486c821 100644
      /*
       * Auto scaling
 -- 
-2.6.3
+2.6.4
 

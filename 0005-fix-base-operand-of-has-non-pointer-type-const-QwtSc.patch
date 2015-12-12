@@ -1,7 +1,7 @@
 From bb32e590e8f65e0d2f926ac2e48bde79f46b2e88 Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 8 Nov 2015 10:02:07 +0100
-Subject: [PATCH 5/5] fix base operand of '->' has non-pointer type 'const
+Subject: [PATCH 5/8] fix base operand of '->' has non-pointer type 'const
  QwtScaleDiv'
 
 because of change in qwt 6.1.x
@@ -27,5 +27,5 @@ index 486c821..288687a 100644
                      /* 
                       * Draw shaded region to left of minimum threshold
 -- 
-2.6.3
+2.6.4
 

@@ -5,11 +5,11 @@
 
 Name:           connectome-workbench
 Version:        1.1.1
-Release:        2%{?dist}
+Release:        3%{?dist}
 Summary:        Connectome Workbench
 
 # Check README for licenses
-License:        GPLv3 and MIT and BSD and LGPLv2
+License:        GPLv3 and BSD
 URL:            http://www.humanconnectome.org/software/connectome-workbench.html
 Source0:        https://github.com/Washington-University/workbench/archive/v%{version}/%{name}-%{version}.tar.gz
 # https://github.com/Washington-University/workbench/pull/13
@@ -18,6 +18,13 @@ Patch1:         0002-cmake-use-system-ftgl-conditionally.patch
 Patch2:         0003-cmake-use-system-quazip-conditionally.patch
 Patch3:         0004-fix-invalid-conversion-from-QWidget-to-QwtPlotCanvas.patch
 Patch4:         0005-fix-base-operand-of-has-non-pointer-type-const-QwtSc.patch
+# https://github.com/Washington-University/workbench/commit/3824cf9503cf5d951fb36f45ddb79732ca6275e2
+Patch5:         0006-In-Qt-4.8.7-colorbar.png-was-causing-a-PNG-warning.-.patch
+# https://github.com/Washington-University/workbench/commit/83cdbb6337d55683f577bc2751bdadf0844ec518
+Patch6:         0007-Fixed-invalid-images-files-in-the-Resource-directory.patch
+# https://github.com/Washington-University/workbench/commit/7ec07012829e853ff7f068bbb789ff9e65e1b9b2
+Patch7:         0008-Read-and-then-re-wrote-pen_eraser.png-using-Mac-s-Pr.patch
+
 BuildRequires:  git-core
 BuildRequires:  cmake
 BuildRequires:  gcc-c++
@@ -50,8 +57,7 @@ sed -i -e '/DEPENDS ApplicationInformation.cxx.in/d' src/Common/CMakeLists.txt
 # some recursion workaround
 sed -i -e '/->beep/s,^,//,' src/Desktop/desktop.cxx
 
-rm -rf src/build/
-mkdir -p src/build/
+mkdir src/build
 
 %build
 pushd src/build/
@@ -76,6 +82,10 @@ popd
 %{_bindir}/wb_command
 
 %changelog
+* Sat Dec 12 2015 Igor Gnatenko <i.gnatenko.brain@gmail.com> - 1.1.1-3
+- Fix license tag
+- Backport some more patches to fix libpng errors
+
 * Tue Nov 10 2015 Igor Gnatenko <i.gnateno.brain@gmail.com> - 1.1.1-2
 - workaround libpng recursion
 - Add -DNDEBUG

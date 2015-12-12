@@ -1,7 +1,7 @@
 From 4e2f834eba09caa7e32b195441f21ecda76a4dfe Mon Sep 17 00:00:00 2001
 From: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 Date: Sun, 8 Nov 2015 09:51:59 +0100
-Subject: [PATCH 3/5] cmake: use system quazip conditionally
+Subject: [PATCH 3/8] cmake: use system quazip conditionally
 
 Signed-off-by: Igor Gnatenko <i.gnatenko.brain@gmail.com>
 ---
@@ -117,5 +117,5 @@ index e4cb9d2..f34f269 100644
 +SET(QUAZIP_LIBRARIES Quazip PARENT_SCOPE)
 +SET(QUAZIP_INCLUDE_DIRS ${CMAKE_CURRENT_SOURCE_DIR} PARENT_SCOPE)
 -- 
-2.6.3
+2.6.4
 

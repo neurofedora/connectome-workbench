@@ -1,0 +1,87 @@
+From c409cdc9d4f32ad0adcd778da731352e98afd3ba Mon Sep 17 00:00:00 2001
+From: John Harwell <john@brainmap.wustl.edu>
+Date: Mon, 28 Sep 2015 12:40:25 -0500
+Subject: [PATCH 6/8] In Qt 4.8.7, colorbar.png was causing a PNG warning. 
+ Opening colorbar.png in an image editor and then resaving it fixed the
+ problem in the image header that was causing the warning.
+
+(cherry picked from commit 3824cf9503cf5d951fb36f45ddb79732ca6275e2)
+---
+ src/Resources/LayersPanel/colorbar.png | Bin 2839 -> 607 bytes
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+diff --git a/src/Resources/LayersPanel/colorbar.png b/src/Resources/LayersPanel/colorbar.png
+index f36bd883b9bb1c3c161925bdb3d41a488a4b62f3..a01823059ec701c5a5c6de96cd07efd949a6a082 100644
+GIT binary patch
+literal 607
+zcmeAS@N?(olHy`uVBq!ia0vp^3LwnE1|*BCs=fdz#^NA%Cx&(BWL^R}oCO|{#S9GG
+z!XV7ZFl&wkP(fs7NJL45ua8x7ey(0(N`6wRUPW#JP&EUCO@$SZnVVXYs8ErclUHn2
+zVXFjIVFhG^g!Ppaz)DK8ZIvQ?0~DO|i&7O#^-S~(l<c?^6clWVQqrt~T->1AfjnEK
+zjFOT9D}DX)@^Za$W4-*MbbUihOG|wNBYh(yU7!lx;>x^|#0uTKVr7USFmqf|i<65o
+z3raHc^AtelCMM;Vme?vOfh>Xph&xL%(-1c06+^uR^q@XSM&D4+Kp$>4P^%3{)XKjo
+zGZknv$b36P8?Z_gF{nK@`XI}Z90TzwSQO}0J1!f2c(B=V`5aP@1cu~%PZ!6K2+rg`
+z|Nq+`c3@i8xJ4%A`wHd=gGCB+KH4{{1cV57h&DusbzGH{$lGXWV8dXP&oudruR<+z
+z$9E<}i9I1n2^HF`AqfW$d~j-Qd^p#L`LMJkTN}R=4^Mo&5z8LCQwqQTN;cn{F3qDk
+zeYwG*EsZZOYDn-lUKGGed=N;Gc`L2-J&3Kz_CY2CLw>cqwR7pQ_n=t!boFyt=akR{
+E004`;*8l(j
+
+delta 2813
+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
+P00000NkvXXu0mjfg3xmR
+
+-- 
+2.6.4
+
